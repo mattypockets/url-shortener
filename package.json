@@ -5,7 +5,8 @@
   "dependencies": {
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "shortid": "^2.2.14"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,5 +22,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "firebase": "^5.8.4"
+  }
 }
