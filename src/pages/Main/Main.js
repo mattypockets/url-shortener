@@ -36,6 +36,7 @@ class Main extends Component {
                 urls: newState
             });
         });
+        this.generator();        
     }
     
 
@@ -45,28 +46,32 @@ class Main extends Component {
         });
     }
 
-    // Return same shortened URL if same long URL is entered
-    urlCheck(){
-        // Generate new short URL
+    // Generate new short URL
+    generator() {
         let shortUrl = shortid.generate();
         this.setState({
             newShort:shortUrl
         });
-        // If new URL matches one in DB, return the same short URL
-        for (let url in this.state.urls) {
-            if (this.state.urls[url].longUrl === this.state.newUrl) {
-                this.setState({
-                    newShort: this.state.urls[url].shortUrl
-                })
-            }
-        }
     }
 
+    // Return same shortened URL if same long URL is entered
+    // urlCheck(){
+    //     this.generator();
+    //     // If new URL matches one in DB, return the same short URL
+    //     for (let url in this.state.urls) {
+    //         if (this.state.urls[url].longUrl === this.state.newUrl) {
+    //             this.setState({
+    //                 newShort: this.state.urls[url].shortUrl
+    //             })
+    //         }
+    //     }
+    // }
 
     handleSubmit(e) {
         e.preventDefault();
+        
         // Run urlCheck to avoid duplicates
-        this.urlCheck();
+        // this.urlCheck();
        
         // Set items to be added to firebase
         const urlRef = firebase.database().ref('urls');
