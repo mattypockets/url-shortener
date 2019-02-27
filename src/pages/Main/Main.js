@@ -1,41 +1,131 @@
 import React, { Component } from 'react';
-import { Form, Table } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import shortid from 'shortid';
 import './Main.css';
 
 class Main extends Component {
 
-    state = {
+    constructor() {
+        super();
+        this.state = {
         urls: [
             //{id: 1, longUrl:"www.foundrymakes.com/work/carmichael-lynch", shortUrl:"localhost:3000/t/eP9Q2", hits: 0}
-        ]
+        ],
+        valid: '',
+        newUrl: '',
+        newShort: '',
+        username: ''
+        }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        const urlRef = firebase.database().ref('urls');
+        urlRef.on('value', (snapshot) => {
+            let urls = snapshot.val();
+            let newState = [];
+            for (let url in urls) {
+                newState.push({
+                    id: url,
+                    longUrl: urls[url].longUrl,
+                    shortUrl: urls[url].shortUrl,
+                    hits: urls[url].hits
+                });
+            }
+            this.setState({
+                urls: newState
+            });
+        });
+    }
+    
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+
+    handleSubmit(e) {
+        e.preventDefault();
+        // Generate a new short ID and set newShort state
+        let short = shortid.generate();
+        this.setState(newShort:short);
+
+        // Set items to be added to firebase
+        const urlRef = firebase.database().ref('urls');
+        const url = {
+            longUrl: this.state.newURL,
+            shortUrl: this.state.newShort,
+            hits: 0,
+            user: this.state.username
+        }
+
+        // Add items to firebase
+        urlRef.push(url);
+
+        // Reset state so that additional urls can be added
+        this.setState({
+            newUrl: '',
+            newShort: ''
+        });
     }
 
 
 
     render() {
         return(
+            
+            <Container>
+                {/*  Header */}
+                <Row>
+                    <Col>URLs</Col>
+                    <Col>Sign Out</Col>
+                </Row>
 
-            // Header
-            // URL Entry
-            // Table
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Original URL</th>
-                        <th>Tiny URL</th>
-                        <th>Hit Count</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.state.urls.map(url => (
-                        <tr>
-                            <td>{url.longUrl}</td>
-                            <td>{url.shortUrl}</td>
-                            <td>{url.hits}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </Table>
+                {/* URL Entry */}
+                <Row>
+                    <Col>
+                        <Form onSubmit={this.handleSubmit}>
+                            <Form.Control size='lg' type='text' name='newUrl' onChange={this.handleChange} value={this.state.newUrl} />
+                            <Form.Text>{this.state.valid}</Form.Text> 
+                            <Button variant='danger' size='lg'>
+                                Create URL
+                            </Button>
+                        </Form>
+                    </Col>
+                </Row>
+
+                {/* Table */}
+                <Row>
+                    <Col>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Original URL</th>
+                                    <th>Tiny URL</th>
+                                    <th>Hit Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {this.state.urls.map(url => (
+                                    return(
+                                        <tr>
+                                            <td>{url.longUrl}</td>
+                                            <td>{url.shortUrl}</td>
+                                            <td>{url.hits}</td>
+                                        </tr>
+                                    )
+                                ))}
+                            </tbody>
+                        </Table>
+                    </Col>
+                </Row>
+            </Container>
+            
         )
     }
 }
+
+export default Main;
