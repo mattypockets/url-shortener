@@ -44,6 +44,7 @@ class Main extends Component {
         this.setState({
             [e.target.name]: e.target.value
         });
+        this.generator();
     }
 
     // Generate new short URL
