@@ -45,17 +45,33 @@ class Main extends Component {
         });
     }
 
+    // Return same shortened URL if same long URL is entered
+    urlCheck(){
+        // Generate new short URL
+        let shortUrl = shortid.generate();
+        this.setState({
+            newShort:shortUrl
+        });
+        // If new URL matches one in DB, return the same short URL
+        for (let url in this.state.urls) {
+            if (this.state.urls[url].longUrl === this.state.newUrl) {
+                this.setState({
+                    newShort: this.state.urls[url].shortUrl
+                })
+            }
+        }
+    }
+
 
     handleSubmit(e) {
         e.preventDefault();
-        // Generate a new short ID and set newShort state
-        let short = shortid.generate();
-        this.setState({newShort:short});
-
+        // Run urlCheck to avoid duplicates
+        this.urlCheck();
+       
         // Set items to be added to firebase
         const urlRef = firebase.database().ref('urls');
         const url = {
-            longUrl: this.state.newURL,
+            longUrl: this.state.newUrl,
             shortUrl: this.state.newShort,
             hits: 0,
             user: this.state.username
@@ -65,10 +81,10 @@ class Main extends Component {
         urlRef.push(url);
 
         // Reset state so that additional urls can be added
-        this.setState({
-            newUrl: '',
-            newShort: ''
-        });
+        // this.setState({
+        //     newUrl: '',
+        //     newShort: ''
+        // });
     }
 
 
