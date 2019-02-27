@@ -9,9 +9,7 @@ class Main extends Component {
     constructor() {
         super();
         this.state = {
-        urls: [
-            //{id: 1, longUrl:"www.foundrymakes.com/work/carmichael-lynch", shortUrl:"localhost:3000/t/eP9Q2", hits: 0}
-        ],
+        urls: [],
         valid: '',
         newUrl: '',
         newShort: '',
@@ -91,7 +89,7 @@ class Main extends Component {
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Control size='lg' type='text' name='newUrl' onChange={this.handleChange} value={this.state.newUrl} />
                             <Form.Text>{this.state.valid}</Form.Text> 
-                            <Button variant='danger' size='lg'>
+                            <Button variant='danger' size='lg' type='submit'>
                                 Create URL
                             </Button>
                         </Form>
