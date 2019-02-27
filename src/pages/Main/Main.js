@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import firebase from '../../firebase.js';
 import shortid from 'shortid';
 import './Main.css';
 
@@ -51,7 +52,7 @@ class Main extends Component {
         e.preventDefault();
         // Generate a new short ID and set newShort state
         let short = shortid.generate();
-        this.setState(newShort:short);
+        this.setState({newShort:short});
 
         // Set items to be added to firebase
         const urlRef = firebase.database().ref('urls');
@@ -110,13 +111,13 @@ class Main extends Component {
                             </thead>
                             <tbody>
                                 {this.state.urls.map(url => (
-                                    return(
+                                    
                                         <tr>
                                             <td>{url.longUrl}</td>
                                             <td>{url.shortUrl}</td>
                                             <td>{url.hits}</td>
                                         </tr>
-                                    )
+                                    
                                 ))}
                             </tbody>
                         </Table>
@@ -124,7 +125,7 @@ class Main extends Component {
                 </Row>
             </Container>
             
-        )
+        );
     }
 }
 
