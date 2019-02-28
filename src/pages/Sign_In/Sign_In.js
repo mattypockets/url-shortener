@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import firebase from '../../firebase.js';
 
 class SignIn extends Component {
@@ -50,7 +50,7 @@ class SignIn extends Component {
                                     <Button variant="danger" size='lg' type="submit">
                                         Sign In
                                     </Button>
-                                </Form>;
+                                </Form>
                             </Col>
                         </Row>
 
