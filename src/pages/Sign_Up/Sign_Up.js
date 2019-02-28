@@ -17,14 +17,18 @@ class SignUp extends Component {
 
     handleSignUp = async event => {
         event.preventDefault();
-        const { email, password } = event.target.elements;
-        try {
-            const user = await firebase
-                .auth()
-                .createUserWithEmailAndPassword(email.value, password.value);
-            this.props.history.push('/');
-        } catch(error) {
-            alert(error);
+        if (this.state.password !== this.state.confirm) {
+            alert("Passwords must match")
+        } else {
+            const { email, password } = event.target.elements;
+            try {
+                const user = await firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(email.value, password.value);
+                this.props.history.push('/');
+            } catch(error) {
+                alert(error);
+            }
         }
     };
 

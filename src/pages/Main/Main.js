@@ -12,25 +12,27 @@ class Main extends Component {
         urls: [],
         valid: '',
         newUrl: '',
-        newShort: '',
-        username: ''
+        newShort: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        const user = firebase.auth().currentUser;
         const urlRef = firebase.database().ref('urls');
         urlRef.on('value', (snapshot) => {
             let urls = snapshot.val();
             let newState = [];
             for (let url in urls) {
-                newState.push({
-                    id: url,
-                    longUrl: urls[url].longUrl,
-                    shortUrl: urls[url].shortUrl,
-                    hits: urls[url].hits
-                });
+                if(urls[url].user === user.uid) {
+                    newState.push({
+                        id: url,
+                        longUrl: urls[url].longUrl,
+                        shortUrl: urls[url].shortUrl,
+                        hits: urls[url].hits
+                });   
+                }
             }
             this.setState({
                 urls: newState
@@ -39,7 +41,7 @@ class Main extends Component {
         this.generator();        
     }
     
-
+    // Update state as url input changes
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -70,6 +72,9 @@ class Main extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
+        const user = firebase.auth().currentUser;
+        console.log(user);
         
         // Run urlCheck to avoid duplicates
         // this.urlCheck();
@@ -80,7 +85,7 @@ class Main extends Component {
             longUrl: this.state.newUrl,
             shortUrl: this.state.newShort,
             hits: 0,
-            user: this.state.username
+            user: user.uid
         }
 
         // Add items to firebase
@@ -93,6 +98,11 @@ class Main extends Component {
         // });
     }
 
+    signOut(e) {
+        e.preventDefault();
+        firebase.auth().signOut();
+    }
+
 
 
     render() {
@@ -102,7 +112,7 @@ class Main extends Component {
                 {/*  Header */}
                 <Row>
                     <Col>URLs</Col>
-                    <Col>Sign Out</Col>
+                    <Col onClick={this.signOut}>Sign Out</Col>
                 </Row>
 
                 {/* URL Entry */}
