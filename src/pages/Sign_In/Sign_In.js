@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import firebase from '../../firebase.js';
 
 class SignIn extends Component {
@@ -74,7 +75,7 @@ class SignIn extends Component {
 
                         {/* Sign up link */}
                         <Row>
-                            <Col>Sign Up</Col>
+                            <Col><Link to='/signup'>Sign Up</Link></Col>
                         </Row>
                     </Col>
                 </Row>

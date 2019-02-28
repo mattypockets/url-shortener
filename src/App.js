@@ -15,6 +15,7 @@ class App extends Component {
     user: null
   }
 
+  // When component mounts, check to see if user is logged in
   componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
