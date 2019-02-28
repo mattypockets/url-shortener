@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignIn from './pages/Sign_In';
 import SignUp from './pages/Sign_Up';
 import Main from './pages/Main';
+import firebase from './firebase';
+import PrivateRoute from './PrivateRoute';
 import './App.css';
 
 class App extends Component {
@@ -14,7 +16,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    app.auth().onAuthStateChanged(user => {
+    firebase.auth().onAuthStateChanged(user => {
       if(user) {
         this.setState({
           authenticated: true,
@@ -30,6 +32,9 @@ class App extends Component {
   }
 
   render() {
+
+    const authenticated = this.state;
+
     return (
       <Router>
         <div>

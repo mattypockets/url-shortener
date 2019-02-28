@@ -17,7 +17,7 @@ class SignUp extends Component {
         event.preventDefault();
         const { email, password } = event.target.elements;
         try {
-            const user = await.app
+            const user = await firebase
                 .auth()
                 .createUserWithEmailAndPassword(email.value, password.value);
             this.props.history.push('/');

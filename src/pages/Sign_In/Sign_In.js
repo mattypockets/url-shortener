@@ -7,12 +7,29 @@ class SignIn extends Component {
     constructor() {
         super();
         this.state = {
-        username: '',
+        email: '',
         password: ''
         }
     }
 
-    
+    handleSignIn = async event => {
+        event.preventDefault();
+        const { email, password } = event.target.elements;
+        try {
+            const user = await firebase
+                .auth()
+                .signInWithEmailAndPassword(email.value, password.value);
+            this.props.history.push('/');
+        } catch(error) {
+            alert(error);
+        }
+    };
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
 
 
 
@@ -36,15 +53,15 @@ class SignIn extends Component {
                         {/* Sign in form */}
                         <Row>
                             <Col>
-                                <Form>
+                                <Form onSubmit={this.handleSignIn}>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" placeholder="tiny@foundrymakes.com" />
+                                        <Form.Control type="email" placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email} />
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Password" />
+                                        <Form.Control type="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
                                     </Form.Group>
                                 
                                     <Button variant="danger" size='lg' type="submit">
