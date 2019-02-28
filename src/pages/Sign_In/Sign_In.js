@@ -10,6 +10,7 @@ class SignIn extends Component {
         email: '',
         password: ''
         }
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSignIn = async event => {
@@ -56,12 +57,12 @@ class SignIn extends Component {
                                 <Form onSubmit={this.handleSignIn}>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email} />
+                                        <Form.Control type="email" name='email' placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email} />
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
+                                        <Form.Control type="password" name='password' placeholder="Password" onChange={this.handleChange} value={this.state.password} />
                                     </Form.Group>
                                 
                                     <Button variant="danger" size='lg' type="submit">
