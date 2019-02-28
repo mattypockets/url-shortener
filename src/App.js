@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import SignIn from './pages/Sign_In';
 import SignUp from './pages/Sign_Up';
 import Main from './pages/Main';
+import t from './pages/t';
+
 import firebase from './firebase';
 import PrivateRoute from './PrivateRoute';
 import './App.css';
@@ -41,6 +43,7 @@ class App extends Component {
         <div>
           <Route exact path='/login' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
+          <Route path='/t' component={t} />
           <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
         </div>
       </Router>
