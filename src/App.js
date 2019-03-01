@@ -41,7 +41,7 @@ class App extends Component {
         <div>
           <Route exact path='/login' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
-          <Route exact path='/t/:' component={t} />
+          <Route exact path='/t' component={t} />
           <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
         </div>
       </Router>
