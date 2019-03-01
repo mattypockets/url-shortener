@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+const express = require('express');
+const app = express();
 
 import firebase from 'firebase';
 
 class t extends Component {
 
   state = {
+    short:'',
     redirect:'',
     newHits: 0,
     longUrl:'',
@@ -27,18 +30,57 @@ class t extends Component {
                     longUrl: urls[url].longUrl,
                     entry: urls[url]
                   })
-                    
                 };   
             };
         });
     
   }
 
-  componentDidUpdate() {
-    // Update hits for short url entry
-    firebase.database().ref('urls/' + this.state.entry).update({hits: this.state.newHits});
+  componentDidMount() {
+    //Get short url from http request
+    this.getShortUrl();
+    //Find db entry for shortened url
+    this.getLongUrl();
+    //Update number of hits in db
+    this.updateHits();
+    //Redirect user to long url
+    this.setRedirect();
+  }
 
-    this.setState({redirect:this.state.longUrl})
+  getShortUrl() {
+    app.get('/t/:shortUrl', function (req,res) {
+      let short = req.params.shortUrl;
+      this.setState({
+        short: short
+      })
+    })
+  }
+
+
+  getLongUrl() {
+    const urlRef = firebase.database().ref('urls');
+        urlRef.on('value', (snapshot) => {
+            let urls = snapshot.val();
+
+            for (let url in urls) {
+                if(urls[url].shortUrl === this.state.short) {
+                  this.setState({
+                    newHits: urls[url].hits + 1,
+                    longUrl: urls[url].longUrl,
+                    entry: urls[url]
+                  })
+                };   
+            };
+        });    
+  }
+
+  updateHits() {
+    const entry = this.state.entry;
+    firebase.database().ref('urls/'+entry).update({hits: this.state.newHits});
+  }
+
+  setRedirect() {
+    this.setState({redirect: this.state.longUrl})
   }
 
   render() {
