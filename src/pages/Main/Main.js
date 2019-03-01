@@ -91,11 +91,10 @@ class Main extends Component {
         // Add items to firebase
         urlRef.push(url);
 
-        // Reset state so that additional urls can be added
-        // this.setState({
-        //     newUrl: '',
-        //     newShort: ''
-        // });
+        // Reset state so that url form is empty
+        this.setState({
+            newUrl: ''
+        });
     }
 
     signOut(e) {
@@ -146,8 +145,8 @@ class Main extends Component {
                                 {this.state.urls.map(url => (
                                     
                                         <tr>
-                                            <td>{url.longUrl}</td>
-                                            <td>{url.shortUrl}</td>
+                                            <td><a href={url.longUrl} target="_blank">{url.longUrl}</a></td>
+                                            <td><a href={url.shortUrl} target="_blank">{url.shortUrl}</a></td>
                                             <td>{url.hits}</td>
                                         </tr>
                                     

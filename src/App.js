@@ -36,14 +36,12 @@ class App extends Component {
 
   render() {
 
-    const authenticated = this.state;
-
     return (
       <Router>
         <div>
           <Route exact path='/login' component={SignIn} />
           <Route exact path='/signup' component={SignUp} />
-          <Route path='/t' component={t} />
+          <Route exact path='/t/:' component={t} />
           <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
         </div>
       </Router>
