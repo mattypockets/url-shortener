@@ -145,8 +145,8 @@ class Main extends Component {
                                 {this.state.urls.map(url => (
                                     
                                         <tr>
-                                            <td><a href={url.longUrl} target="_blank">{url.longUrl}</a></td>
-                                            <td><a href={url.shortUrl} target="_blank">{url.shortUrl}</a></td>
+                                            <td><a href={url.longUrl} target='_blank' rel='noopener noreferrer'>{url.longUrl}</a></td>
+                                            <td><a href={url.shortUrl} target='_blank' rel='noopener noreferrer'>{url.shortUrl}</a></td>
                                             <td>{url.hits}</td>
                                         </tr>
                                     
