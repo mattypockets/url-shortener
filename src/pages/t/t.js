@@ -1,59 +1,36 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-const express = require('express');
-const app = express();
-
 import firebase from 'firebase';
+
 
 class t extends Component {
 
   state = {
     short:'',
     redirect:'',
-    newHits: 0,
+    newHits: null,
     longUrl:'',
     entry:''
   }
 
-  // When component mounts, find short URL in db, add 1 to hit counter, redirect user to long URL
+  
   componentDidMount() {
-    let path = window.location.pathname.slice(3);
+      //Get short url from http request
+      this.getShortUrl();
+      //Find db entry for shortened url
+      this.getLongUrl();
     
-    const urlRef = firebase.database().ref('urls');
-        urlRef.on('value', (snapshot) => {
-            let urls = snapshot.val();
-
-            for (let url in urls) {
-                if(urls[url].shortUrl === path) {
-                  this.setState({
-                    newHits: urls[url].hits + 1,
-                    longUrl: urls[url].longUrl,
-                    entry: urls[url]
-                  })
-                };   
-            };
-        });
     
+  //   //Redirect user to long url
+  //   this.setRedirect();
   }
 
-  componentDidMount() {
-    //Get short url from http request
-    this.getShortUrl();
-    //Find db entry for shortened url
-    this.getLongUrl();
-    //Update number of hits in db
-    this.updateHits();
-    //Redirect user to long url
-    this.setRedirect();
-  }
+
 
   getShortUrl() {
-    app.get('/t/:shortUrl', function (req,res) {
-      let short = req.params.shortUrl;
-      this.setState({
-        short: short
-      })
-    })
+    const { short } = this.props.match.params
+
+    this.setState({short:short}, this.getLongUrl());
   }
 
 
@@ -65,28 +42,38 @@ class t extends Component {
             for (let url in urls) {
                 if(urls[url].shortUrl === this.state.short) {
                   this.setState({
-                    newHits: urls[url].hits + 1,
+                    newHits: urls[url].hits,
                     longUrl: urls[url].longUrl,
-                    entry: urls[url]
-                  })
+                    entry: [url][0]
+                  }, this.updateHits())
                 };   
             };
-        });    
+        }); 
   }
 
   updateHits() {
-    const entry = this.state.entry;
-    firebase.database().ref('urls/'+entry).update({hits: this.state.newHits});
+    if(this.state.entry !== '') {
+      let entry = this.state.entry;
+      let newHits = this.state.newHits;
+      newHits = newHits + 1;
+      console.log('new hits: ' + newHits);
+      console.log('entry: ' + entry)
+
+      firebase.database().ref('urls/'+ entry).update({hits: newHits});
+    }
+    
   }
 
-  setRedirect() {
-    this.setState({redirect: this.state.longUrl})
-  }
+  // setRedirect() {
+  //   this.setState({redirect: this.state.longUrl})
+  // }
 
   render() {
-
+    this.updateHits();
     return (
-      <Redirect to={this.state.redirect} />
+      // <Redirect to={this.state.redirect} />
+
+      <div>{this.state.short}</div>
     );
   }
 }

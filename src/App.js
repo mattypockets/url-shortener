@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SignIn from './pages/Sign_In';
 import SignUp from './pages/Sign_Up';
@@ -39,10 +39,12 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path='/login' component={SignIn} />
-          <Route exact path='/signup' component={SignUp} />
-          <Route path='/t' component={t} />
-          <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
+          <Switch>
+            <Route exact path='/login' component={SignIn} />
+            <Route exact path='/signup' component={SignUp} />
+            <Route path='/:short' component={t} />
+            <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
+          </Switch>
         </div>
       </Router>
     );

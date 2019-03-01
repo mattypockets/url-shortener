@@ -29,7 +29,7 @@ class Main extends Component {
                     newState.push({
                         id: url,
                         longUrl: urls[url].longUrl,
-                        shortUrl: "http://localhost:3000/t/" + urls[url].shortUrl,
+                        shortUrl: "http://localhost:3000/" + urls[url].shortUrl,
                         hits: urls[url].hits
                 });   
                 }
