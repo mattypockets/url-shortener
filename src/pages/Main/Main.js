@@ -18,7 +18,7 @@ class Main extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const user = firebase.auth().currentUser;
         const urlRef = firebase.database().ref('urls');
         urlRef.on('value', (snapshot) => {
@@ -44,7 +44,8 @@ class Main extends Component {
     // Update state as url input changes
     handleChange(e) {
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            valid:''
         });
         this.generator();
     }
@@ -57,32 +58,49 @@ class Main extends Component {
         });
     }
 
-    // Return same shortened URL if same long URL is entered
-    // urlCheck(){
-    //     this.generator();
-    //     // If new URL matches one in DB, return the same short URL
-    //     for (let url in this.state.urls) {
-    //         if (this.state.urls[url].longUrl === this.state.newUrl) {
-    //             this.setState({
-    //                 newShort: this.state.urls[url].shortUrl
-    //             })
-    //         }
-    //     }
-    // }
+    // Check to make sure url is valid
+    urlChecker() {
+        let expression = /[-a-zA-Z0-9@:%_.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_.~#?&//=]*)?/gi;
+        let regex = new RegExp(expression);
+        let longUrl = this.state.newUrl;
+        console.log("Long url: "+longUrl)
+
+        // Add http:// if not included in url
+        if(longUrl.substring(-2,7) !== "http://" && longUrl.substring(-2,8) !== "https://") {
+            console.log(longUrl.substring(-2,7));
+            console.log(longUrl.substring(-2,8));
+            longUrl = "http://" + longUrl;
+        }
+
+        if(longUrl.match(regex)) {
+            this.urlSubmit(longUrl);
+        } else {
+            this.setState({
+                valid: "Please enter a valid URL"
+            })
+        }
+    }
 
     handleSubmit(e) {
         e.preventDefault();
 
-        const user = firebase.auth().currentUser;
-        console.log(user);
-        
-        // Run urlCheck to avoid duplicates
-        // this.urlCheck();
+        // Run urlChecker to ensure valid url 
+        this.urlChecker()
        
+    }
+
+    signOut(e) {
+        e.preventDefault();
+        firebase.auth().signOut();
+    }
+
+    // Save url data to db
+    urlSubmit(longUrl) {
+        const user = firebase.auth().currentUser;
         // Set items to be added to firebase
         const urlRef = firebase.database().ref('urls');
         const url = {
-            longUrl: this.state.newUrl,
+            longUrl: longUrl,
             shortUrl: this.state.newShort,
             hits: 0,
             user: user.uid
@@ -96,12 +114,6 @@ class Main extends Component {
             newUrl: ''
         });
     }
-
-    signOut(e) {
-        e.preventDefault();
-        firebase.auth().signOut();
-    }
-
 
 
     render() {

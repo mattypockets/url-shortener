@@ -31,6 +31,7 @@ class t extends Component {
     }
   }
 
+  // Get the short URL from the address bar
   getShortUrl() {
     const { short } = this.props.match.params
 
@@ -38,6 +39,7 @@ class t extends Component {
   }
 
 
+  // Search through the db to find the long URL that matches the shortened string
   getLongUrl() {
     const urlRef = firebase.database().ref('urls');
         urlRef.on('value', (snapshot) => {
@@ -55,6 +57,7 @@ class t extends Component {
         }); 
   }
 
+  // Increment the hit counter when a short URL is redirected
   updateHits() {
     if(this.state.entry !== '') {
       let entry = this.state.entry;
@@ -68,6 +71,7 @@ class t extends Component {
     
   }
 
+  // Set the state to the long URL for a proper redirect
   setRedirect() {
     if (this.state.longUrl !== ''){
       let redirect = this.state.longUrl;
