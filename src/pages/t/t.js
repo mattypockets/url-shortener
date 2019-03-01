@@ -74,7 +74,7 @@ class t extends Component {
   setRedirect() {
     if (this.state.longUrl !== ''){
       let redirect = this.state.longUrl;
-      redirect = 'http://' + redirect;
+      // redirect = 'http://' + redirect;
       this.setState({redirect: redirect})
     }
     
