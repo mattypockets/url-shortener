@@ -20,7 +20,6 @@ class t extends Component {
     this.getLongUrl();
     //Update number of hits in the db
     this.updateHits();
-    
   }
 
   componentDidUpdate() {

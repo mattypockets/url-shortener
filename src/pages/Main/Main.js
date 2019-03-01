@@ -63,12 +63,9 @@ class Main extends Component {
         let expression = /[-a-zA-Z0-9@:%_.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_.~#?&//=]*)?/gi;
         let regex = new RegExp(expression);
         let longUrl = this.state.newUrl;
-        console.log("Long url: "+longUrl)
 
         // Add http:// if not included in url
         if(longUrl.substring(-2,7) !== "http://" && longUrl.substring(-2,8) !== "https://") {
-            console.log(longUrl.substring(-2,7));
-            console.log(longUrl.substring(-2,8));
             longUrl = "http://" + longUrl;
         }
 
@@ -85,8 +82,7 @@ class Main extends Component {
         e.preventDefault();
 
         // Run urlChecker to ensure valid url 
-        this.urlChecker()
-       
+        this.urlChecker()   
     }
 
     signOut(e) {
