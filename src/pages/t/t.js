@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router';
 import firebase from 'firebase';
 
 
@@ -15,17 +14,22 @@ class t extends Component {
 
   
   componentDidMount() {
-      //Get short url from http request
-      this.getShortUrl();
-      //Find db entry for shortened url
-      this.getLongUrl();
+    //Get short url from http request
+    this.getShortUrl();
+    //Find db entry for shortened url
+    this.getLongUrl();
+    //Update number of hits in the db
+    this.updateHits();
     
-    
-  //   //Redirect user to long url
-  //   this.setRedirect();
   }
 
-
+  componentDidUpdate() {
+    //Redirect user to long url
+    this.setRedirect();
+    if(this.state.redirect !== '') {
+      window.location.href=this.state.redirect;
+    }
+  }
 
   getShortUrl() {
     const { short } = this.props.match.params
@@ -64,16 +68,21 @@ class t extends Component {
     
   }
 
-  // setRedirect() {
-  //   this.setState({redirect: this.state.longUrl})
-  // }
+  setRedirect() {
+    if (this.state.longUrl !== ''){
+      let redirect = this.state.longUrl;
+      redirect = 'http://' + redirect;
+      this.setState({redirect: redirect})
+    }
+    
+  }
 
   render() {
-    this.updateHits();
+    
     return (
-      // <Redirect to={this.state.redirect} />
-
-      <div>{this.state.short}</div>
+        <div>
+          Redirecting...
+        </div>
     );
   }
 }
