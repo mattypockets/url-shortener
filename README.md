@@ -29,8 +29,8 @@ After that, just run the app
 Then you're good to go!
 
 ### Technologies used
-[Create React App](https://github.com/facebook/create-react-app)
-[Firebase](https://firebase.google.com/)
-[React-Router](https://github.com/ReactTraining/react-router)
-[React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
+[Create React App](https://github.com/facebook/create-react-app)  
+[Firebase](https://firebase.google.com/)  
+[React-Router](https://github.com/ReactTraining/react-router)  
+[React-Bootstrap](https://github.com/react-bootstrap/react-bootstrap)  
 [shortid](https://github.com/dylang/shortid)
