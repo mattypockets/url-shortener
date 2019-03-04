@@ -1,3 +1,13 @@
+# Teeny Url - Your Own Personal URL Shortener
+
+
+
+## Run it yourself
+
+After cloning the project, cd into the project directory and install dependencies with either
+`npm install
+ yarn install`
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
