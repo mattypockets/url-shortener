@@ -3,8 +3,6 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase.js';
 
-import './Sign_In.css';
-
 class SignIn extends Component {
 
     constructor() {
