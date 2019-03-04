@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import firebase from '../../firebase.js';
 import shortid from 'shortid';
-import './Main.css';
+
 
 class Main extends Component {
 
