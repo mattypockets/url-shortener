@@ -3,6 +3,8 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase.js';
 
+import './Sign_In.css';
+
 class SignIn extends Component {
 
     constructor() {
@@ -40,16 +42,16 @@ class SignIn extends Component {
             
             <Container>
                 
-                <Row>
+                <Row className='label'>
                     <Col>You need to sign in or sign up before continuing.</Col>
                 </Row>
 
                 {/* Sign in box */}
                 <Row>
-                    <Col>
+                    <Col className='formBox'>
                         {/* Header */}
                         <Row>
-                            <Col>Sign In</Col>
+                            <Col className='header'>Sign In</Col>
                         </Row>
 
                         {/* Sign in form */}
@@ -58,15 +60,15 @@ class SignIn extends Component {
                                 <Form onSubmit={this.handleSignIn}>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" name='email' placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email} />
+                                        <Form.Control className='inputField' type="email" name='email' placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email} />
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password</Form.Label>
-                                        <Form.Control type="password" name='password' placeholder="Password" onChange={this.handleChange} value={this.state.password} />
+                                        <Form.Control className='inputField' type="password" name='password' placeholder="Password" onChange={this.handleChange} value={this.state.password} />
                                     </Form.Group>
                                 
-                                    <Button variant="danger" size='lg' type="submit">
+                                    <Button variant="danger" size='lg' type="submit" className='button'>
                                         Sign In
                                     </Button>
                                 </Form>
@@ -75,7 +77,7 @@ class SignIn extends Component {
 
                         {/* Sign up link */}
                         <Row>
-                            <Col><Link to='/signup'>Sign Up</Link></Col>
+                            <Col className='link'><Link to='/signup' className='link'>Sign Up</Link></Col>
                         </Row>
                     </Col>
                 </Row>

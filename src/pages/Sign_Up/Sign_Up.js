@@ -47,10 +47,10 @@ class SignUp extends Component {
                
                 {/* Sign up box */}
                 <Row>
-                    <Col>
+                    <Col className='formBox signUp'>
                         {/* Header */}
                         <Row>
-                            <Col>Sign Up</Col>
+                            <Col className='header'>Sign Up</Col>
                         </Row>
 
                         {/* Sign in form */}
@@ -59,17 +59,17 @@ class SignUp extends Component {
                                 <Form onSubmit={this.handleSignUp}>
                                     <Form.Group controlId="formBasicEmail">
                                         <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" name='email' placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email}/>
+                                        <Form.Control  className='inputField' type="email" name='email' placeholder="tiny@foundrymakes.com" onChange={this.handleChange} value={this.state.email}/>
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Password (6 character min.)</Form.Label>
-                                        <Form.Control type="password" name='password' placeholder="Password" onChange={this.handleChange} value={this.state.password} />
+                                        <Form.Control  className='inputField' type="password" name='password' placeholder="Password" onChange={this.handleChange} value={this.state.password} />
                                     </Form.Group>
 
                                     <Form.Group controlId="formBasicPassword">
                                         <Form.Label>Confirm Password</Form.Label>
-                                        <Form.Control type="password" name='confirm' placeholder="Confirm Password" onChange={this.handleChange} value={this.state.confirm} />
+                                        <Form.Control  className='inputField' type="password" name='confirm' placeholder="Confirm Password" onChange={this.handleChange} value={this.state.confirm} />
                                     </Form.Group>
                                 
                                     <Button variant="danger" size='lg' type="submit">
@@ -81,7 +81,7 @@ class SignUp extends Component {
 
                         {/* Sign in link */}
                         <Row>
-                            <Col><Link to='/login'>Sign In</Link></Col>
+                            <Col className='link'><Link to='/login' className='link'>Sign In</Link></Col>
                         </Row>
                     </Col>
                 </Row>

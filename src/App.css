@@ -1,33 +1,82 @@
-.App {
+body {
+  background-color: #F2F2F2;
+  color: #00364F;
+  font-weight: 600;
+}
+
+.header {
+  text-align: center;
+  font-size: 2em;
+  padding-bottom: 5px;
+}
+
+.formBox {
+  max-width: 30%;
+  background-color: #FFFFFF;
+  border: 1px solid #7E98A4;
+  border-radius: 5px;
+  position: absolute;
+  padding: 15px;
+  margin: 10px 20px;
+  left: 33.33%;
+  right: 33.33%;
+}
+
+.mainBox {
+  background-color: #FFFFFF;
+  border: 1px solid #7E98A4;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 20px;
+}
+
+.btn {
+  width: 100%;
+  background-color: #ED4238;
+  margin-top: 10px;
+}
+
+.link {
+  text-align: center;
+  color: #00364F;
+  margin-top: 15px;
+}
+
+.label {
+  padding-top: 5%;
+  padding-bottom: 15px;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.inputField {
+  border-color: #7E98A4;
+  color: #00364F;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.signUp {
+  margin-top: 5%;
 }
 
-.App-link {
-  color: #61dafb;
+.urlError {
+  color: #ED4238;
+  font-weight: 700;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.urlButton {
+  max-width: 25%;
+}
+
+.signOut {
+  text-align: right;
+  padding-right: 25px;
+  padding-top: 15px;
+}
+
+.urlHeader {
+  text-align: left;
+  padding-left: 25px;
+}
+
+.headerRow {
+  margin-top: 5%;
 }

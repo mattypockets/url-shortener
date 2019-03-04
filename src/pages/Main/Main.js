@@ -118,21 +118,20 @@ class Main extends Component {
             
             <Container>
                 {/*  Header */}
-                <Row>
-                    <Col>URLs</Col>
-                    <Col onClick={this.signOut}>Sign Out</Col>
+                <Row className='headerRow'>
+                    <Col className='header urlHeader'>URLs</Col>
+                    <Col className='signOut' onClick={this.signOut}>Sign Out</Col>
                 </Row>
 
                 {/* URL Entry */}
                 <Row>
-                    <Col>
+                    <Col className='mainBox'>
                         <Form onSubmit={this.handleSubmit}>
                             <Form.Control size='lg' type='text' name='newUrl' onChange={this.handleChange} value={this.state.newUrl} />
                             
-                            {/* Add URL validation */}
-                            <Form.Text>{this.state.valid}</Form.Text> 
+                            <Form.Text className='urlError'>{this.state.valid}</Form.Text> 
 
-                            <Button variant='danger' size='lg' type='submit'>
+                            <Button variant='danger' size='lg' type='submit' className='urlButton'>
                                 Create URL
                             </Button>
                         </Form>
@@ -141,7 +140,7 @@ class Main extends Component {
 
                 {/* Table */}
                 <Row>
-                    <Col>
+                    <Col className='mainBox'>
                         <Table>
                             <thead>
                                 <tr>
