@@ -19,6 +19,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
+        const href = window.location.href;
         const user = firebase.auth().currentUser;
         const urlRef = firebase.database().ref('urls');
         urlRef.on('value', (snapshot) => {
@@ -29,7 +30,7 @@ class Main extends Component {
                     newState.push({
                         id: url,
                         longUrl: urls[url].longUrl,
-                        shortUrl: "http://localhost:3000/" + urls[url].shortUrl,
+                        shortUrl: href + urls[url].shortUrl,
                         hits: urls[url].hits
                 });   
                 }
