@@ -17,7 +17,7 @@ After cloning the project, cd into the project directory and install dependencie
 `npm install`  
 `yarn install`
 
-You'll also need to create a new project on [Firebase](https://firebase.google.com/) and add the config to firebase.js
+You'll also need to create a new project on [Firebase](https://firebase.google.com/) and add the config to /src/firebase.js
 
 ![](/screenshots/firebaseConfig.gif)
 
