@@ -1,4 +1,6 @@
 # Teeny Url - Your Own Personal URL Shortener
+### Try it [here](https://foundry-url-shortener.firebaseapp.com/)
+### Demo Email: **test@test**.com Password: tester
 
 This project was created as a coding challenge for [Foundry](https://www.foundrymakes.com/)
 
