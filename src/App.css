@@ -80,3 +80,7 @@ body {
 .headerRow {
   margin-top: 5%;
 }
+
+.invalid {
+  border-color: red;
+}

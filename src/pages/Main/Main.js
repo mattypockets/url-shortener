@@ -74,7 +74,7 @@ class Main extends Component {
             this.urlSubmit(longUrl);
         } else {
             this.setState({
-                valid: "Please enter a valid URL"
+                valid: "Error: Long URL is not a valid URL"
             })
         }
     }
@@ -127,7 +127,7 @@ class Main extends Component {
                 <Row>
                     <Col className='mainBox'>
                         <Form onSubmit={this.handleSubmit}>
-                            <Form.Control size='lg' type='text' name='newUrl' onChange={this.handleChange} value={this.state.newUrl} />
+                            <Form.Control size='lg' type='text' name='newUrl' onChange={this.handleChange} value={this.state.newUrl} className={`${this.state.valid ? 'invalid':''}`} />
                             
                             <Form.Text className='urlError'>{this.state.valid}</Form.Text> 
 
