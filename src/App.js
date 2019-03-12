@@ -13,12 +13,12 @@ import './App.css';
 class App extends Component {
 
   state = {
-    authenticated: false,
+    authenticated: null,
     user: null
   }
 
   // When component mounts, check to see if user is logged in
-  componentWillMount() {
+  componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if(user) {
         this.setState({
@@ -35,19 +35,24 @@ class App extends Component {
   }
 
   render() {
-
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path='/login' component={SignIn} />
-            <Route exact path='/signup' component={SignUp} />
-            <Route path='/:short' component={t} />
-            <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
-          </Switch>
-        </div>
-      </Router>
-    );
+    if (this.state.authenticated === null) {
+      return null;
+    }
+    
+    if (this.state.authenticated !== null) {
+      return (
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path='/login' component={SignIn} />
+              <Route exact path='/signup' component={SignUp} />
+              <Route path='/:short' component={t} />
+              <PrivateRoute exact path= '/' component={Main} authenticated={this.state.authenticated} />
+            </Switch>
+          </div>
+        </Router>
+      );
+    };
   }
 }
 
