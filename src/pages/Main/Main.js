@@ -145,8 +145,8 @@ class Main extends Component {
                             <thead>
                                 <tr>
                                     <th>Original URL</th>
-                                    <th>Tiny URL</th>
-                                    <th>Hit Count</th>
+                                    <th className='tiny'>Tiny URL</th>
+                                    <th className='hits'>Hit Count</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -154,8 +154,8 @@ class Main extends Component {
                                     
                                         <tr>
                                             <td><a href={url.longUrl} target='_blank' rel='noopener noreferrer'>{url.longUrl}</a></td>
-                                            <td><a href={url.shortUrl} target='_blank' rel='noopener noreferrer'>{url.shortUrl}</a></td>
-                                            <td>{url.hits}</td>
+                                            <td classname='tiny'><a href={url.shortUrl} target='_blank' rel='noopener noreferrer'>{url.shortUrl}</a></td>
+                                            <td className='hits'>{url.hits}</td>
                                         </tr>
                                     
                                 ))}

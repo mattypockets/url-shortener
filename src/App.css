@@ -84,3 +84,22 @@ body {
 .invalid {
   border-color: red;
 }
+
+td, th {
+  word-break: break-all;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.hits {
+  width: 20%;
+  max-width: 140px;
+}
+
+.tiny {
+  width: 30%;
+  max-width: 390px;
+}
