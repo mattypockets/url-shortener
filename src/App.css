@@ -11,15 +11,12 @@ body {
 }
 
 .formBox {
-  width: 400px;
+  max-width: 400px;
   background-color: #FFFFFF;
   border: 1px solid #7E98A4;
   border-radius: 5px;
-  position: absolute;
   padding: 20px;
-  margin: 10px 20px;
-  left: 33.33%;
-  right: 33.33%;
+  margin: 10px auto;
 }
 
 .mainBox {
